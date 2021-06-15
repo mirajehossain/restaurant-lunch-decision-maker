@@ -4,9 +4,9 @@ from rest_framework.exceptions import ValidationError
 
 
 def user_registration_validator(obj: Dict):
-    if not obj.get('phone_number'):
+    if not obj.get('username'):
         raise ValidationError(
-            {'detail': 'phone_number can not be empty'}, code=status.HTTP_422_UNPROCESSABLE_ENTITY
+            {'detail': 'username can not be empty'}, code=status.HTTP_422_UNPROCESSABLE_ENTITY
         )
 
     if not obj.get('first_name') or not obj.get('last_name'):
