@@ -1,20 +1,16 @@
 import logging
-from rest_framework.generics import RetrieveAPIView, CreateAPIView
+from rest_framework.generics import RetrieveAPIView, CreateAPIView, ListAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 
+from base.helpers import CustomPagination
 from user.models import User
+from user.permissions import IsSuperUser
 from user.serializers import UserLiteSerializer
 from user.validatiors import user_registration_validator
 
 logger = logging.getLogger('django')
-
-
-class HelloWorldAPIView(RetrieveAPIView):
-    def get(self, request, *args, **kwargs):
-        return Response({
-            'message': 'Hello world from user module'
-        }, status=status.HTTP_200_OK)
 
 
 class CreateAdminAPIView(CreateAPIView):
@@ -84,3 +80,15 @@ class CreateUserAPIView(CreateAPIView):
             'message': 'Successfully registered new user',
             'data': UserLiteSerializer(user).data
         }, status=status.HTTP_201_CREATED)
+
+
+class UserListAPIView(ListAPIView):
+    permission_classes = [IsAuthenticated, IsSuperUser]
+    serializer_class = UserLiteSerializer
+    queryset = User.objects.filter()
+    pagination_class = CustomPagination
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.order_by('-created_at')
+
