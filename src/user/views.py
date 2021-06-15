@@ -93,7 +93,7 @@ class UserListAPIView(ListAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.order_by('-created_at')
+        return queryset
 
 
 class LoginAPIView(CreateAPIView):
