@@ -18,3 +18,15 @@ def user_registration_validator(obj: Dict):
         raise ValidationError(
             {'detail': 'password can not be empty'}, code=status.HTTP_422_UNPROCESSABLE_ENTITY
         )
+
+
+def user_login_validator(obj: Dict):
+    if not obj.get('username'):
+        raise ValidationError(
+            {'detail': 'username can not be empty'}, code=status.HTTP_422_UNPROCESSABLE_ENTITY
+        )
+
+    if not obj.get('password'):
+        raise ValidationError(
+            {'detail': 'password can not be empty'}, code=status.HTTP_422_UNPROCESSABLE_ENTITY
+        )
