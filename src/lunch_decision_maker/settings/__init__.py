@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
+from lunch_decision_maker.settings.settings import *
 from lunch_decision_maker.settings.base import *
 from lunch_decision_maker.settings.apps import *
 from lunch_decision_maker.settings.app_vars import *

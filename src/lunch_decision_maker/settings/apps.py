@@ -61,9 +61,18 @@ LOCAL_MIDDLEWARE = [
     'base.middleware.AuthMiddleware',
     'base.middleware.RequestResponseLogMiddleware',
 ]
-
 MIDDLEWARE = ON_TOP_MIDDLEWARE + DEFAULT_MIDDLEWARE + THIRD_PARTY_MIDDLEWARE + LOCAL_MIDDLEWARE
 
 ROOT_URLCONF = 'lunch_decision_maker.urls'
 
 WSGI_APPLICATION = 'lunch_decision_maker.wsgi.application'
+
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.SHA1PasswordHasher',
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+    'django.contrib.auth.hashers.CryptPasswordHasher',
+)
