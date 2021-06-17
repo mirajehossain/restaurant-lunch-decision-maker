@@ -19,6 +19,7 @@ from lunch_decision_maker.views import HealthCheckAPI
 
 v1_patterns = [
     path('users/', include('user.urls', namespace='user_api')),
+    path('restaurants/', include('restaurant.urls', namespace='restaurant_api')),
 ]
 
 urlpatterns = [
