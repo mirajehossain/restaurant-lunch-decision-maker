@@ -2,14 +2,11 @@ from typing import List, Dict, Union, Tuple
 import logging
 
 from django.http import HttpRequest, JsonResponse
-from django.contrib.auth.models import Group
-
 import jwt
 from rest_framework import status
 
 from lunch_decision_maker.settings import SECRET_KEY
 from user.models import User
-
 
 logger = logging.getLogger('django')
 
@@ -36,8 +33,13 @@ class AuthMiddleware:
                         'message': 'user is not valid',
                         'success': False
                     }, status=status.HTTP_401_UNAUTHORIZED)
+                groups = [group.name for group in user_obj.groups.filter()]
+                if groups:
+                    setattr(request, 'groups', groups)
+                else:
+                    setattr(request, 'groups', [])
                 setattr(request, 'user', user_obj)
-                setattr(request, 'is_superuser', payload['is_superuser'])
+                setattr(request, 'is_superuser', user_obj.is_superuser)
             except Exception as err:
                 return JsonResponse(data={
                     'message': f'auth exception {str(err)}',
