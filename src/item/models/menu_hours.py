@@ -7,8 +7,7 @@ from base.models import BaseModel
 class MenuHours(BaseModel):
     """
     Holds Restaurant menu hours
-    like: sunday '3 Dragons' restaurant serve tow menu hour Lunch Menu(12:00 PM - 03:00 PM) and
-        Dinner Menu(06:00 PM - 10:00 PM)
+    like: sunday restaurant serve to menu hour Lunch Menu(12:00 PM - 03:00 PM)
 
     Attributes
     ----------
@@ -17,7 +16,7 @@ class MenuHours(BaseModel):
     week_day: name of the week day like "Saturday, Sunday"
     start_time: start time of the menu in 24hr format
     end_time: end time of the menu in 24hr format
-    status: active, inactive, delete
+    status: active, archived, delete
     """
 
     class Status(models.TextChoices):
