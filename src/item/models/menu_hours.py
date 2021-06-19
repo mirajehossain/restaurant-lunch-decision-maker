@@ -53,4 +53,3 @@ class MenuHours(BaseModel):
                 fields=['restaurant', 'name', 'week_day'],
                 name='unique_restaurant_menu_hour_name'),
         ]
-

@@ -19,4 +19,3 @@ class ItemsListView(ListAPIView):
     queryset = queryset.filter(menu_hours__week_day=week_day)
 
     serializer_class = ItemSerializer
-

@@ -129,5 +129,3 @@ class LoginAPIView(CreateAPIView):
             return Response({
                 'message': 'User does not exist'
             }, status=status.HTTP_404_NOT_FOUND)
-
-

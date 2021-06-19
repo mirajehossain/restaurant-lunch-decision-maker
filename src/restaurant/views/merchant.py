@@ -35,4 +35,3 @@ class RestaurantMerchantRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     def perform_update(self, serializer):
         updated_by = UserLiteSerializer(self.request.user).data
         serializer.save(updated_by=updated_by)
-

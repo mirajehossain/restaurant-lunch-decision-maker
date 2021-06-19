@@ -47,9 +47,3 @@ class AuthMiddleware:
                 }, status=401)
         response = self.get_response(request)
         return response
-
-
-
-
-
-
