@@ -9,3 +9,8 @@ class IsSuperUser(permissions.BasePermission):
 class IsRestaurantOwner(permissions.BasePermission):
     def has_permission(self, request, view):
         return 'RestaurantOwner' in request.groups
+
+
+class IsEmployee(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return 'Employee' in request.groups
