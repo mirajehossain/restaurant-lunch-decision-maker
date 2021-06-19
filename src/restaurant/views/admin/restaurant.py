@@ -85,7 +85,6 @@ class AssignOwner(CreateAPIView):
                 )
             owner = self.request.data['owner']
 
-            # Check username, first_name and last_name provided
             if not owner:
                 return Response(
                     {

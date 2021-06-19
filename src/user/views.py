@@ -1,7 +1,8 @@
 import logging
 
 import jwt
-from rest_framework.generics import RetrieveAPIView, CreateAPIView, ListAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView
+from django.contrib.auth.models import Group
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
@@ -78,6 +79,11 @@ class CreateUserAPIView(CreateAPIView):
 
         user.set_password(request.data.get('password'))
         user.save()
+
+        employee_group, created = Group.objects.get_or_create(
+            name='Employee'
+        )
+        employee_group.user_set.add(user)
 
         return Response({
             'message': 'Successfully registered new user',
