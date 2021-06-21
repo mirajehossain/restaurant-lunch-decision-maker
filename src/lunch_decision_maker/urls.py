@@ -21,6 +21,7 @@ v1_patterns = [
     path('users/', include('user.urls', namespace='user_api')),
     path('restaurants/', include('restaurant.urls', namespace='restaurant_api')),
     path('items/', include('item.urls', namespace='restaurant_item_api')),
+    path('votes/', include('voting.urls', namespace='restaurant_votes_api')),
 ]
 
 urlpatterns = [

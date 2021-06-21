@@ -21,7 +21,8 @@ LOCAL_APPS = [
     'base',
     'user',
     'restaurant',
-    'item'
+    'item',
+    'voting'
 ]
 
 INSTALLED_APPS = ON_TOP_APPS + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
