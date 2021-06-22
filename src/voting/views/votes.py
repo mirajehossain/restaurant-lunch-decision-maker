@@ -55,8 +55,10 @@ class MakeVotDecisionAPIView(CreateAPIView):
                 item_count=Coalesce(Count(F('item_id')), 0))\
             .order_by('-item_count')\
             .values('item_id', 'item_count', 'item__restaurant_id')
+
         maxVotesItem = maxVotes.first()
-        if len(maxVotesItem) == 0:
+
+        if maxVotes.count() == 0:
             return Response({
                 'success': False,
                 'message': 'No votes given for today'
@@ -67,7 +69,6 @@ class MakeVotDecisionAPIView(CreateAPIView):
             True if item.restaurant_id == maxVotesItem.get('item__restaurant_id')
             else False for item in lastThreeResults
         ]
-        print(maxVotes)
         if all(restaurantConsecutiveResult) and restaurantConsecutiveResult == 3:
             voteResult = VoteResult(
                 number_of_votes=maxVotes[1].get('item_count'),
