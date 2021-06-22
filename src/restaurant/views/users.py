@@ -10,7 +10,7 @@ from restaurant.serializers import (
 
 
 class RestaurantGetAPIView(RetrieveAPIView):
-    permission_classes = (permissions.AllowAny)
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Restaurant.objects.filter()
     lookup_field = 'slug'
     serializer_class = RestaurantSerializer

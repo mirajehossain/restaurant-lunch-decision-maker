@@ -95,6 +95,11 @@ class VotesOnItemCreateAPIView(CreateAPIView):
         employee = self.request.user
         item = Item.objects.filter(id=item_id).first()
 
+        if not item:
+            return Response(
+                {'success': False, 'message': 'item not found'}, status=status.HTTP_400_BAD_REQUEST
+            )
+
         # check today voting is done or not
         today_date = datetime.now()
         start_date_today = today_date.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -104,10 +109,6 @@ class VotesOnItemCreateAPIView(CreateAPIView):
         if result:
             return Response(
                 {'success': False, 'message': 'voting time is over for today'}, status=status.HTTP_400_BAD_REQUEST
-            )
-        if not item:
-            return Response(
-                {'success': False, 'message': 'item not found'}, status=status.HTTP_400_BAD_REQUEST
             )
 
         checkEmployeeVotesForToday = Vote.objects.filter(

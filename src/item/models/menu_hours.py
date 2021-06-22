@@ -48,8 +48,4 @@ class MenuHours(BaseModel):
         verbose_name = _('Menu Hour')
         verbose_name_plural = _('Menu Hours')
         db_table = 'menu_hours'
-        constraints = [
-            models.UniqueConstraint(
-                fields=['restaurant', 'name', 'week_day'],
-                name='unique_restaurant_menu_hour_name'),
-        ]
+        unique_together = [['restaurant', 'name', 'week_day']]
