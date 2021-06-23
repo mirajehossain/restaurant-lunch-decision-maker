@@ -60,7 +60,7 @@ class MenuHoursSerializer(serializers.ModelSerializer):
         validators = [
             UniqueTogetherValidator(
                 queryset=MenuHours.objects.all(),
-                fields=['restaurant', 'name']
+                fields=['restaurant', 'name', 'week_day']
             )
         ]
 
