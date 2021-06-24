@@ -11,6 +11,7 @@ from rest_framework.generics import (
 )
 from rest_framework.response import Response
 
+from base.helpers import CustomPagination
 from restaurant.models import Restaurant
 from restaurant.serializers import (
     RestaurantSerializer
@@ -27,6 +28,7 @@ class RestaurantListCreateAPIView(ListCreateAPIView):
     permission_classes = [permissions.IsSuperUser]
     queryset = Restaurant.objects.filter()
     serializer_class = RestaurantSerializer
+    pagination_class = CustomPagination
     ordering_fields = ['-created_at']
 
     def get_queryset(self):

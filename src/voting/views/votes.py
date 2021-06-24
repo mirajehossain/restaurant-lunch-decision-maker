@@ -28,9 +28,11 @@ class WinnerRestaurantRetrieveAPIView(RetrieveAPIView):
         print(start_date_today, end_date_today)
         result = VoteResult.objects.filter(date__gte=start_date_today, date__lt=end_date_today).first()
 
-        return Response(
-            {'success': True, 'data': VoteResultSerializer(result).data}, status=status.HTTP_200_OK
-        )
+        return Response({
+            'success': True,
+            'message': 'The winner menu item is below',
+            'data': VoteResultSerializer(result).data
+        }, status=status.HTTP_200_OK)
 
 
 class MakeVotDecisionAPIView(CreateAPIView):
@@ -83,9 +85,11 @@ class MakeVotDecisionAPIView(CreateAPIView):
                 restaurant_id=maxVotesItem.get('item__restaurant_id'),
             )
             voteResult.save()
-        return Response(
-            {'success': True, 'data': VoteResultSerializer(voteResult).data}, status=status.HTTP_200_OK
-        )
+        return Response({
+            'success': True,
+            'message': 'Vote result is created',
+            'data': VoteResultSerializer(voteResult).data
+        }, status=status.HTTP_200_OK)
 
 
 class VotesOnItemCreateAPIView(CreateAPIView):
@@ -130,6 +134,8 @@ class VotesOnItemCreateAPIView(CreateAPIView):
         )
 
         vote.save()
-        return Response(
-            {'success': True, 'data': VoteSerializer(vote).data}, status=status.HTTP_201_CREATED
-        )
+        return Response({
+            'success': True,
+            'message': 'Your vote has been created.',
+            'data': VoteSerializer(vote).data
+        }, status=status.HTTP_201_CREATED)
