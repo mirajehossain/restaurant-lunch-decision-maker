@@ -43,6 +43,7 @@ class CreateAdminAPIView(CreateAPIView):
         user.set_password(request.data.get('password'))
         user.save()
 
+        logger.info('new admin user is registered')
         return Response({
             'message': 'Successfully registered new admin',
             'data': UserLiteSerializer(user).data
@@ -84,6 +85,7 @@ class CreateUserAPIView(CreateAPIView):
             name='Employee'
         )
         employee_group.user_set.add(user)
+        logger.info('new employee user is registered')
 
         return Response({
             'message': 'Successfully registered new user',

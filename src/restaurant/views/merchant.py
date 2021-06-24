@@ -31,7 +31,3 @@ class RestaurantMerchantRetrieveUpdateAPIView(RetrieveUpdateAPIView):
         return Restaurant.objects.get(
             owner=self.request.user, slug=self.kwargs.get('slug')
         )
-
-    def perform_update(self, serializer):
-        updated_by = UserLiteSerializer(self.request.user).data
-        serializer.save(updated_by=updated_by)

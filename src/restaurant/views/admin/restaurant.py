@@ -45,6 +45,7 @@ class RestaurantListCreateAPIView(ListCreateAPIView):
         random_chars = ''.join(choices(ascii_lowercase, k=5))
 
         slug: str = slugify(self.request.data['name']) + '-' + random_chars
+        logger.info('new restaurant created')
         serializer.save(
             created_by=UserLiteSerializer(self.request.user).data, slug=slug
         )
